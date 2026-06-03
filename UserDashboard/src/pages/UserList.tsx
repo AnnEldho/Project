@@ -11,13 +11,20 @@ function UserList() {
   }, []);
 
   return (
-    <div>
-      <h1>User Dashboard</h1>
+    <div className="min-h-screen bg-gray-100 p-6">
+  <h1 className="text-4xl font-bold mb-8">
+    User Dashboard
+  </h1>
 
-      {users.map((user) => (
-        <UserCard key={user.id} user={user} />
-      ))}
-    </div>
+  <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    {users.map((user) => (
+      <UserCard
+        key={user.id}
+        user={user}
+      />
+    ))}
+  </div>
+</div>
   );
 }
 
