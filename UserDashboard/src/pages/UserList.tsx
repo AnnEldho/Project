@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
 import { getUsers } from "../services/UserServices";
 import type { User } from "../types/User";
-
 import Navbar from "../components/NavBar";
 import Sidebar from "../components/Sidebar";
 import UserCard from "../components/UserCard";
-import SearchBar from "../components/SearchBar";
-import SortControls from "../components/SortControls";
+import StatsCards from "../components/StatsCards";
 
 function UserList() {
   const [users, setUsers] = useState<User[]>([]);
@@ -14,6 +12,9 @@ function UserList() {
 
   const [sortField, setSortField] = useState("name");
   const [sortOrder, setSortOrder] = useState("asc");
+
+  const [selectedCity, setSelectedCity] = useState("");
+const [selectedCompany, setSelectedCompany] = useState("");
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -37,17 +38,34 @@ function UserList() {
     fetchUsers();
   }, []);
 
+  const cities=[...new Set(users.map((user) => user.address.city))];
+  const companies=[...new Set(users.map((user) => user.company.name))];
+
+  
   const filteredUsers: User[] = [];
 
-  for (const user of users) {
-    if (
-      user.name.toLowerCase().includes(search.toLowerCase()) ||
-      user.username.toLowerCase().includes(search.toLowerCase()) ||
-      user.email.toLowerCase().includes(search.toLowerCase())
-    ) {
-      filteredUsers.push(user);
-    }
+for (const user of users) {
+  const matchesSearch =
+    user.name.toLowerCase().includes(search.toLowerCase()) ||
+    user.username.toLowerCase().includes(search.toLowerCase()) ||
+    user.email.toLowerCase().includes(search.toLowerCase());
+
+  const matchesCity =
+    selectedCity === "" ||
+    user.address.city === selectedCity;
+
+  const matchesCompany =
+    selectedCompany === "" ||
+    user.company.name === selectedCompany;
+
+  if (
+    matchesSearch &&
+    matchesCity &&
+    matchesCompany
+  ) {
+    filteredUsers.push(user);
   }
+}
 
   const sortedUsers = [...filteredUsers].sort((a, b) => {
     const valueA = a[sortField as keyof User];
@@ -89,20 +107,27 @@ function UserList() {
   }
 
   return (
-  <div className="min-h-screen bg-gray-100">
+  <div className="min-h-screen bg-slate-100">
     <Navbar />
 
     <div className="flex">
       <Sidebar
-        search={search}
-        setSearch={setSearch}
-        sortField={sortField}
-        setSortField={setSortField}
-        sortOrder={sortOrder}
-        setSortOrder={setSortOrder}
-      />
+  search={search}
+  setSearch={setSearch}
+  sortField={sortField}
+  setSortField={setSortField}
+  sortOrder={sortOrder}
+  setSortOrder={setSortOrder}
+  cities={cities}
+  companies={companies}
+  selectedCity={selectedCity}
+  setSelectedCity={setSelectedCity}
+  selectedCompany={selectedCompany}
+  setSelectedCompany={setSelectedCompany}
+/>
 
-      <main className="flex-1 p-6">
+      <main className="flex-1 p-8">
+        <StatsCards users={users} />
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {sortedUsers.length > 0 ? (
             sortedUsers.map((user) => (

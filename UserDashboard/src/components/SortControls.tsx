@@ -12,11 +12,11 @@ function SortControls({
   setSortOrder,
 }: SortControlsProps) {
   return (
-    <div className="flex gap-4 mb-6">
+    <div className="space-y-4">
       <select
         value={sortField}
         onChange={(e) => setSortField(e.target.value)}
-        className="border p-2 rounded"
+        className="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
       >
         <option value="name">Name</option>
         <option value="username">Username</option>
@@ -26,7 +26,7 @@ function SortControls({
       <select
         value={sortOrder}
         onChange={(e) => setSortOrder(e.target.value)}
-        className="border p-2 rounded"
+        className="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
       >
         <option value="asc">Ascending</option>
         <option value="desc">Descending</option>
