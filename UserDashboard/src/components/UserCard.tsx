@@ -1,14 +1,16 @@
 import type { User } from "../types/User";
 import { FaEnvelope, FaPhone, FaBuilding, FaMapMarkerAlt } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 interface UserCardProps {
   user: User;
 }
 
 function UserCard({ user }: UserCardProps) {
+  const navigate = useNavigate();
   return (
     <div className="bg-white rounded-2xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 p-6 border border-slate-100">
-      
+
       <div className="mb-4">
         <h2 className="text-xl font-bold text-slate-800">
           {user.name}
@@ -50,7 +52,9 @@ function UserCard({ user }: UserCardProps) {
       </div>
 
       <div className="mt-5 pt-4 border-t">
-        <button className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition">
+        <button
+          className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition"
+          onClick={() => navigate(`/users/${user.id}`)}>
           View Details
         </button>
       </div>
