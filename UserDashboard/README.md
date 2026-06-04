@@ -1,73 +1,115 @@
-# React + TypeScript + Vite
+# User Management Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern User Management Dashboard built with React, TypeScript, Tailwind CSS, and Vite. The application fetches user data from an external API and provides features for searching, sorting, filtering, pagination, and viewing detailed user information.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+* Fetch user data from REST API
+* Search users by name, username, or email
+* Sort users by name, username, or email
+* Filter users by city and company
+* Pagination for improved navigation
+* Detailed user profile page
+* Responsive dashboard layout
+* Modern UI with Tailwind CSS
+* Performance optimization using React Hooks
 
-## React Compiler
+## Technologies Used
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+* React
+* TypeScript
+* Vite
+* Tailwind CSS
+* React Router DOM
+* React Icons
 
-## Expanding the ESLint configuration
+## Project Structure
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```text
+src/
+├── components/
+│   ├── Navbar.tsx
+│   ├── Sidebar.tsx
+│   ├── SearchBar.tsx
+│   ├── SortControls.tsx
+│   ├── FilterControls.tsx
+│   ├── Pagination.tsx
+│   ├── StatsCards.tsx
+│   └── UserCard.tsx
+│
+├── pages/
+│   ├── UserList.tsx
+│   └── UserDetail.tsx
+│
+├── routes/
+│   └── AppRoutes.tsx
+│
+├── services/
+│   └── UserServices.ts
+│
+├── types/
+│   └── User.ts
+│
+├── App.tsx
+└── main.tsx
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Installation
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Clone the repository:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+git clone <https://github.com/AnnEldho/Project.git>
 ```
+
+Navigate to the project directory:
+
+```bash
+cd UserDashboard
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+Build for production:
+
+```bash
+npm run build
+```
+
+Preview production build:
+
+```bash
+npm run preview
+```
+
+## API Source
+
+User data is fetched from:
+
+https://jsonplaceholder.typicode.com/users
+
+## Performance Optimizations
+
+* useMemo for filtering and sorting operations
+* Component-based architecture
+* Efficient state management with React Hooks
+* Client-side pagination
+
+## Future Enhancements
+
+* Dark Mode
+* Debounced Search
+* React.memo optimization
+* User editing functionality
+* Authentication and authorization
+
