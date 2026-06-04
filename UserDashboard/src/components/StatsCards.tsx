@@ -10,17 +10,17 @@ function StatsCards({ users }: StatsCardsProps) {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-      <div className="bg-white p-6 rounded-xl shadow border-1-4 border-blue-500 ">
+      <div className="bg-white rounded-2xl shadow-md p-6 transition-all duration-300 hover:shadow-5xl hover:-translate-y-5 border-l-4 border-blue-500">        
         <h3 className="text-gray-500 text-sm">Total Users</h3>
         <p className="text-3xl font-bold">{users.length}</p>
       </div>
 
-      <div className="bg-white p-6 rounded-xl shadow border-1-4 border-green-500">
+      <div className="bg-white rounded-2xl shadow-md p-6 transition-all duration-300 hover:shadow-5xl hover:-translate-y-5 border-l-4 border-blue-500">       
         <h3 className="text-gray-500 text-sm">Cities</h3>
         <p className="text-3xl font-bold">{cities.size}</p>
       </div>
 
-      <div className="bg-white p-6 rounded-xl shadow border-1-4 border-purple-500">
+      <div className="bg-white rounded-2xl shadow-md p-6 transition-all duration-300 hover:shadow-5xl hover:-translate-y-5 border-l-4 border-blue-500">
         <h3 className="text-gray-500 text-sm">Companies</h3>
         <p className="text-3xl font-bold">{companies.size}</p>
       </div>

@@ -73,9 +73,9 @@ function Sidebar({
 
         {/* Search */}
         <div className="mb-8">
-          <div className="flex items-center gap-2 mb-3">
-            <FaSearch className="text-slate-400" />
-            <h3 className="font-semibold text-slate-300">
+          <div className="flex items-center gap-2 mb-3 ">
+            <FaSearch className="text-slate-400 transition-transform duration-300 hover:rotate-12 hover:text-blue-400" />
+            <h3 className="font-semibold text-slate-300 transition-colors duration-300 hover:text-blue-400">
               Search Users
             </h3>
           </div>
@@ -91,8 +91,8 @@ function Sidebar({
         {/* Sorting */}
         <div className="mb-8">
           <div className="flex items-center gap-2 mb-3">
-            <FaSort className="text-slate-400" />
-            <h3 className="font-semibold text-slate-300">
+            <FaSort className="text-slate-400 transition-transform duration-300 hover:rotate-12 hover:text-blue-400" />
+            <h3 className="font-semibold text-slate-300 transition-colors duration-300 hover:text-blue-400">
               Sort Users
             </h3>
           </div>
@@ -110,8 +110,8 @@ function Sidebar({
         {/* Filters */}
         <div>
           <div className="flex items-center gap-2 mb-3">
-            <FaFilter className="text-slate-400" />
-            <h3 className="font-semibold text-slate-300">
+            <FaFilter className="text-slate-400 transition-transform duration-300 hover:rotate-12 hover:text-blue-400" />
+            <h3 className="font-semibold text-slate-300 transition-colors duration-300 hover:text-blue-400">
               Filters
             </h3>
           </div>

@@ -7,7 +7,7 @@ function Navbar() {
     User Management Dashboard
   </h1>
 
-  <div className="h-10 w-10 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold">
+  <div className="h-10 w-10 rounded-full bg-blue-500 text-white flex items-center justify-center cursor-pointer hover:scale-120 hover:rotate-20 transition-all duration-300">
     A
   </div>
 </nav>
