@@ -5,6 +5,7 @@ import Navbar from "../components/NavBar";
 import Sidebar from "../components/Sidebar";
 import UserCard from "../components/UserCard";
 import StatsCards from "../components/StatsCards";
+import Pagination from "../components/Pagination";
 
 function UserList() {
   const [users, setUsers] = useState<User[]>([]);
@@ -14,7 +15,10 @@ function UserList() {
   const [sortOrder, setSortOrder] = useState("asc");
 
   const [selectedCity, setSelectedCity] = useState("");
-const [selectedCompany, setSelectedCompany] = useState("");
+  const [selectedCompany, setSelectedCompany] = useState("");
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const usersPerPage = 5;
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -38,34 +42,44 @@ const [selectedCompany, setSelectedCompany] = useState("");
     fetchUsers();
   }, []);
 
-  const cities=[...new Set(users.map((user) => user.address.city))];
-  const companies=[...new Set(users.map((user) => user.company.name))];
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [
+    search,
+    selectedCity,
+    selectedCompany,
+    sortField,
+    sortOrder,
+  ]);
 
-  
+  const cities = [...new Set(users.map((user) => user.address.city))];
+  const companies = [...new Set(users.map((user) => user.company.name))];
+
+
   const filteredUsers: User[] = [];
 
-for (const user of users) {
-  const matchesSearch =
-    user.name.toLowerCase().includes(search.toLowerCase()) ||
-    user.username.toLowerCase().includes(search.toLowerCase()) ||
-    user.email.toLowerCase().includes(search.toLowerCase());
+  for (const user of users) {
+    const matchesSearch =
+      user.name.toLowerCase().includes(search.toLowerCase()) ||
+      user.username.toLowerCase().includes(search.toLowerCase()) ||
+      user.email.toLowerCase().includes(search.toLowerCase());
 
-  const matchesCity =
-    selectedCity === "" ||
-    user.address.city === selectedCity;
+    const matchesCity =
+      selectedCity === "" ||
+      user.address.city === selectedCity;
 
-  const matchesCompany =
-    selectedCompany === "" ||
-    user.company.name === selectedCompany;
+    const matchesCompany =
+      selectedCompany === "" ||
+      user.company.name === selectedCompany;
 
-  if (
-    matchesSearch &&
-    matchesCity &&
-    matchesCompany
-  ) {
-    filteredUsers.push(user);
+    if (
+      matchesSearch &&
+      matchesCity &&
+      matchesCompany
+    ) {
+      filteredUsers.push(user);
+    }
   }
-}
 
   const sortedUsers = [...filteredUsers].sort((a, b) => {
     const valueA = a[sortField as keyof User];
@@ -82,6 +96,18 @@ for (const user of users) {
 
     return 0;
   });
+
+  const indexOfLastUser = currentPage * usersPerPage;
+  const indexOfFirstUser = indexOfLastUser - usersPerPage;
+
+  const currentUsers = sortedUsers.slice(
+    indexOfFirstUser,
+    indexOfLastUser
+  );
+
+  const totalPages = Math.ceil(
+    sortedUsers.length / usersPerPage
+  );
 
   if (loading) {
     return (
@@ -107,45 +133,50 @@ for (const user of users) {
   }
 
   return (
-  <div className="min-h-screen bg-slate-100">
-    <Navbar />
+    <div className="min-h-screen bg-slate-100">
+      <Navbar />
 
-    <div className="flex">
-      <Sidebar
-  search={search}
-  setSearch={setSearch}
-  sortField={sortField}
-  setSortField={setSortField}
-  sortOrder={sortOrder}
-  setSortOrder={setSortOrder}
-  cities={cities}
-  companies={companies}
-  selectedCity={selectedCity}
-  setSelectedCity={setSelectedCity}
-  selectedCompany={selectedCompany}
-  setSelectedCompany={setSelectedCompany}
-/>
+      <div className="flex">
+        <Sidebar
+          search={search}
+          setSearch={setSearch}
+          sortField={sortField}
+          setSortField={setSortField}
+          sortOrder={sortOrder}
+          setSortOrder={setSortOrder}
+          cities={cities}
+          companies={companies}
+          selectedCity={selectedCity}
+          setSelectedCity={setSelectedCity}
+          selectedCompany={selectedCompany}
+          setSelectedCompany={setSelectedCompany}
+        />
 
-      <main className="flex-1 p-8">
-        <StatsCards users={users} />
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {sortedUsers.length > 0 ? (
-            sortedUsers.map((user) => (
-              <UserCard
-                key={user.id}
-                user={user}
-              />
-            ))
-          ) : (
-            <div className="col-span-full text-center text-lg font-semibold">
-              No users found
-            </div>
-          )}
-        </div>
-      </main>
+        <main className="flex-1 p-8">
+          <StatsCards users={users} />
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {currentUsers.length > 0 ? (
+              currentUsers.map((user) => (
+                <UserCard
+                  key={user.id}
+                  user={user}
+                />
+              ))
+            ) : (
+              <div className="col-span-full text-center text-lg font-semibold">
+                No users found
+              </div>
+            )}
+          </div>
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            setCurrentPage={setCurrentPage}
+          />
+        </main>
+      </div>
     </div>
-  </div>
-);
+  );
 }
 
 export default UserList;
