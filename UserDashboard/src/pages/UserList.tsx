@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect,useMemo, useState } from "react";
 import { getUsers } from "../services/UserServices";
 import type { User } from "../types/User";
 import Navbar from "../components/NavBar";
@@ -56,9 +56,9 @@ function UserList() {
   const companies = [...new Set(users.map((user) => user.company.name))];
 
 
-  const filteredUsers: User[] = [];
-
-  for (const user of users) {
+  const filteredUsers = useMemo(() => {
+    console.log("Filtering...");
+  return users.filter((user) => {
     const matchesSearch =
       user.name.toLowerCase().includes(search.toLowerCase()) ||
       user.username.toLowerCase().includes(search.toLowerCase()) ||
@@ -72,16 +72,17 @@ function UserList() {
       selectedCompany === "" ||
       user.company.name === selectedCompany;
 
-    if (
+    return (
       matchesSearch &&
       matchesCity &&
       matchesCompany
-    ) {
-      filteredUsers.push(user);
-    }
-  }
+    );
+  });
+}, [users, search, selectedCity, selectedCompany]);
 
-  const sortedUsers = [...filteredUsers].sort((a, b) => {
+  const sortedUsers = useMemo(() => {
+    console.log("Sorting...");
+  return [...filteredUsers].sort((a, b) => {
     const valueA = a[sortField as keyof User];
     const valueB = b[sortField as keyof User];
 
@@ -96,7 +97,7 @@ function UserList() {
 
     return 0;
   });
-
+}, [filteredUsers, sortField, sortOrder]);
   const indexOfLastUser = currentPage * usersPerPage;
   const indexOfFirstUser = indexOfLastUser - usersPerPage;
 
