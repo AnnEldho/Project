@@ -1,5 +1,3 @@
-import { FaUserCircle } from "react-icons/fa";
-
 function Navbar() {
   return (
     <nav className="bg-white shadow-md px-8 py-4 flex justify-between items-center">
