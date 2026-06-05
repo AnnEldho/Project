@@ -8,6 +8,7 @@ function UserDetail() {
   const navigate = useNavigate();
 
   const [user, setUser] = useState<User | null>(null);
+  const [activeTab, setActiveTab] = useState("contact");
 
   useEffect(() => {
     getUsers().then((data) => {
@@ -30,147 +31,223 @@ function UserDetail() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-100 via-blue-50 to-slate-200 p-8">
 
-      {/* Back Button */}
-      <button
-        onClick={() => navigate(-1)}
+      {/* Profile Card */}
+      <div
         className="
-          mb-6
-          bg-blue-600
-          text-white
-          px-5
-          py-2
-          rounded-xl
-          hover:bg-blue-700
-          hover:scale-105
-          transition-all
-          duration-300
+        max-w-4xl
+        mx-auto
+        bg-white
+        rounded-3xl
+        shadow-lg
+        p-6
+        mb-8
         "
       >
-        ← Back to Dashboard
-      </button>
-
-      {/* User Header */}
-      <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
-        <div className="flex items-center gap-6">
+        <div className="flex flex-col items-center text-center">
 
           <div
             className="
-              w-24
-              h-24
-              rounded-full
-              bg-blue-600
-              text-white
-              flex
-              items-center
-              justify-center
-              text-4xl
-              font-bold
-              shadow-lg
+            w-32
+            h-32
+            rounded-full
+            bg-blue-600
+            text-white
+            flex
+            items-center
+            justify-center
+            text-6xl
+            font-bold
+            shadow-lg
+            mb-4
             "
           >
-            {user.name.charAt(0)}
+            {user.name[0]}
           </div>
 
-          <div>
-            <h1 className="text-4xl font-bold text-slate-800">
-              {user.name}
-            </h1>
+          <h1 className="text-5xl font-bold text-slate-800">
+            {user.name}
+          </h1>
 
-            <p className="text-slate-500 text-lg">
-              @{user.username}
-            </p>
-          </div>
+          <p className="text-slate-500 text-xl mt-2">
+            @{user.username}
+          </p>
         </div>
       </div>
 
-      {/* Information Cards */}
-      <div className="grid md:grid-cols-2 gap-6">
-
-        {/* Contact Information */}
-        <div
-          className="
-            bg-white
-            rounded-2xl
-            shadow-md
-            p-6
-            hover:-translate-y-1
-            hover:shadow-xl
-            transition-all
-            duration-300
-          "
+      {/* Tabs */}
+      <div
+        className="
+        max-w-md
+        mx-auto
+        bg-white
+        rounded-2xl
+        shadow-md
+        p-2
+        flex
+        justify-center
+        gap-2
+        mb-8
+        "
+      >
+        <button
+          onClick={() => setActiveTab("contact")}
+          className={`px-5 py-2 rounded-xl transition-all duration-300 ${
+            activeTab === "contact"
+              ? "bg-blue-600 text-white shadow-md"
+              : "text-slate-600 hover:bg-slate-100"
+          }`}
         >
-          <h2 className="text-xl font-bold mb-4 text-blue-600">
-            Contact Information
-          </h2>
+          Contact
+        </button>
 
-          <div className="space-y-2">
-            <p><strong>Email:</strong> {user.email}</p>
-            <p><strong>Phone:</strong> {user.phone}</p>
-            <p><strong>Website:</strong> {user.website}</p>
-          </div>
-        </div>
-
-        {/* Address Information */}
-        <div
-          className="
-            bg-white
-            rounded-2xl
-            shadow-md
-            p-6
-            hover:-translate-y-1
-            hover:shadow-xl
-            transition-all
-            duration-300
-          "
+        <button
+          onClick={() => setActiveTab("address")}
+          className={`px-5 py-2 rounded-xl transition-all duration-300 ${
+            activeTab === "address"
+              ? "bg-blue-600 text-white shadow-md"
+              : "text-slate-600 hover:bg-slate-100"
+          }`}
         >
-          <h2 className="text-xl font-bold mb-4 text-blue-600">
-            Address Information
-          </h2>
+          Address
+        </button>
 
-          <div className="space-y-2">
-            <p><strong>Street:</strong> {user.address.street}</p>
-            <p><strong>Suite:</strong> {user.address.suite}</p>
-            <p><strong>City:</strong> {user.address.city}</p>
-            <p><strong>Zipcode:</strong> {user.address.zipcode}</p>
-            <p><strong>Latitude:</strong> {user.address.geo.lat}</p>
-            <p><strong>Longitude:</strong> {user.address.geo.lng}</p>
-          </div>
-        </div>
-
-        {/* Company Information */}
-        <div
-          className="
-            bg-white
-            rounded-2xl
-            shadow-md
-            p-6
-            md:col-span-2
-            hover:-translate-y-1
-            hover:shadow-xl
-            transition-all
-            duration-300
-          "
+        <button
+          onClick={() => setActiveTab("company")}
+          className={`px-5 py-2 rounded-xl transition-all duration-300 ${
+            activeTab === "company"
+              ? "bg-blue-600 text-white shadow-md"
+              : "text-slate-600 hover:bg-slate-100"
+          }`}
         >
-          <h2 className="text-xl font-bold mb-4 text-blue-600">
-            Company Information
-          </h2>
-
-          <div className="space-y-2">
-            <p><strong>Name:</strong> {user.company.name}</p>
-
-            <p>
-              <strong>Catch Phrase:</strong>{" "}
-              {user.company.catchPhrase}
-            </p>
-
-            <p>
-              <strong>Business:</strong>{" "}
-              {user.company.bs}
-            </p>
-          </div>
-        </div>
-
+          Company
+        </button>
       </div>
+
+      {/* Information Card */}
+      <div
+        className="
+        max-w-4xl
+        mx-auto
+        bg-white
+        rounded-3xl
+        shadow-lg
+        p-10
+        mb-8
+        "
+      >
+
+        {activeTab === "contact" && (
+          <>
+            <h2 className="text-3xl font-bold mb-8 text-blue-600">
+              Contact Information
+            </h2>
+
+            <div className="space-y-5">
+              <div className="grid grid-cols-2">
+                <span className="font-semibold">Email</span>
+                <span>{user.email}</span>
+              </div>
+
+              <div className="grid grid-cols-2">
+                <span className="font-semibold">Phone</span>
+                <span>{user.phone}</span>
+              </div>
+
+              <div className="grid grid-cols-2">
+                <span className="font-semibold">Website</span>
+                <span>{user.website}</span>
+              </div>
+            </div>
+          </>
+        )}
+
+        {activeTab === "address" && (
+          <>
+            <h2 className="text-3xl font-bold mb-8 text-blue-600">
+              Address Information
+            </h2>
+
+            <div className="space-y-5">
+              <div className="grid grid-cols-2">
+                <span className="font-semibold">Street</span>
+                <span>{user.address.street}</span>
+              </div>
+
+              <div className="grid grid-cols-2">
+                <span className="font-semibold">Suite</span>
+                <span>{user.address.suite}</span>
+              </div>
+
+              <div className="grid grid-cols-2">
+                <span className="font-semibold">City</span>
+                <span>{user.address.city}</span>
+              </div>
+
+              <div className="grid grid-cols-2">
+                <span className="font-semibold">Zipcode</span>
+                <span>{user.address.zipcode}</span>
+              </div>
+
+              <div className="grid grid-cols-2">
+                <span className="font-semibold">Latitude</span>
+                <span>{user.address.geo.lat}</span>
+              </div>
+
+              <div className="grid grid-cols-2">
+                <span className="font-semibold">Longitude</span>
+                <span>{user.address.geo.lng}</span>
+              </div>
+            </div>
+          </>
+        )}
+
+        {activeTab === "company" && (
+          <>
+            <h2 className="text-3xl font-bold mb-8 text-blue-600">
+              Company Information
+            </h2>
+
+            <div className="space-y-5">
+              <div className="grid grid-cols-2">
+                <span className="font-semibold">Company Name</span>
+                <span>{user.company.name}</span>
+              </div>
+
+              <div className="grid grid-cols-2">
+                <span className="font-semibold">Catch Phrase</span>
+                <span>{user.company.catchPhrase}</span>
+              </div>
+
+              <div className="grid grid-cols-2">
+                <span className="font-semibold">Business</span>
+                <span>{user.company.bs}</span>
+              </div>
+            </div>
+          </>
+        )}
+      </div>
+
+      {/* Back Button */}
+      <div className="flex justify-center">
+        <button
+          onClick={() => navigate("/")}
+          className="
+          bg-slate-800
+          text-white
+          px-8
+          py-3
+          rounded-xl
+          hover:bg-slate-700
+          hover:scale-105
+          transition-all
+          duration-300
+          shadow-md
+          "
+        >
+          ← Back to Dashboard
+        </button>
+      </div>
+
     </div>
   );
 }

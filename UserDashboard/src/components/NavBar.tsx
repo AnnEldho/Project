@@ -1,6 +1,6 @@
 function Navbar() {
   return (
-    <nav className="bg-white shadow-md px-8 py-4 flex justify-between items-center">
+    <nav className="bg-white sticky top-0 z-50 shadow-md px-8 py-4 flex justify-between items-center">
   <h1 className="text-2xl font-bold text-gray-800">
     User Management Dashboard
   </h1>
