@@ -47,10 +47,7 @@ function Sidebar({
   setSelectedCompany,
 }: SidebarProps) {
   return (
-    <aside className="w-72 h-screen sticky top-0 bg-slate-900 text-white shadow-2xl flex flex-col">
-      
-      {/* Header */}
-      <div className="p-6 border-b border-slate-800">
+  <aside className="w-64 h-[calc(100vh-72px)] bg-slate-900 text-white shadow-2xl flex flex-col">      <div className="p-6 border-b border-slate-800">
         <div className="flex items-center gap-3">
           <div className="bg-blue-600 p-2 rounded-lg">
             <FaUsers className="text-white text-xl" />
@@ -69,7 +66,7 @@ function Sidebar({
       </div>
 
       {/* Sidebar Content */}
-      <div className="flex-1 p-6 overflow-y-auto">
+      <div className="flex-1 p-6 ">
 
         {/* Search */}
         <div className="mb-8">
@@ -128,14 +125,11 @@ function Sidebar({
       </div>
 
       {/* Footer */}
-      <div className="p-6 border-t border-slate-800">
+      <div className="p-6 border-t border-slate-800 mt-auto">
         <p className="text-sm text-slate-400">
           User Management Dashboard
         </p>
 
-        <p className="text-xs text-slate-500 mt-1">
-          React • TypeScript • Tailwind CSS
-        </p>
       </div>
     </aside>
   );

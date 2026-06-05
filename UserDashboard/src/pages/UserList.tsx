@@ -134,50 +134,60 @@ function UserList() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-100">
-      <Navbar />
+  <div className="h-screen bg-slate-100 overflow-hidden">
+    <Navbar />
 
-      <div className="flex">
-        <Sidebar
-          search={search}
-          setSearch={setSearch}
-          sortField={sortField}
-          setSortField={setSortField}
-          sortOrder={sortOrder}
-          setSortOrder={setSortOrder}
-          cities={cities}
-          companies={companies}
-          selectedCity={selectedCity}
-          setSelectedCity={setSelectedCity}
-          selectedCompany={selectedCompany}
-          setSelectedCompany={setSelectedCompany}
+    <div className="flex h-[calc(100vh-72px)]">
+
+      <Sidebar
+        search={search}
+        setSearch={setSearch}
+        sortField={sortField}
+        setSortField={setSortField}
+        sortOrder={sortOrder}
+        setSortOrder={setSortOrder}
+        cities={cities}
+        companies={companies}
+        selectedCity={selectedCity}
+        setSelectedCity={setSelectedCity}
+        selectedCompany={selectedCompany}
+        setSelectedCompany={setSelectedCompany}
+      />
+
+      <main
+        className="
+        flex-1
+        overflow-y-auto
+        p-8
+        "
+      >
+        <StatsCards users={users} />
+
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {currentUsers.length > 0 ? (
+            currentUsers.map((user) => (
+              <UserCard
+                key={user.id}
+                user={user}
+              />
+            ))
+          ) : (
+            <div className="col-span-full text-center text-lg font-semibold">
+              No users found
+            </div>
+          )}
+        </div>
+
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          setCurrentPage={setCurrentPage}
         />
+      </main>
 
-        <main className="flex-1 p-8">
-          <StatsCards users={users} />
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {currentUsers.length > 0 ? (
-              currentUsers.map((user) => (
-                <UserCard
-                  key={user.id}
-                  user={user}
-                />
-              ))
-            ) : (
-              <div className="col-span-full text-center text-lg font-semibold">
-                No users found
-              </div>
-            )}
-          </div>
-          <Pagination
-            currentPage={currentPage}
-            totalPages={totalPages}
-            setCurrentPage={setCurrentPage}
-          />
-        </main>
-      </div>
     </div>
-  );
+  </div>
+);
 }
 
 export default UserList;
