@@ -7,7 +7,12 @@ import UserCard from "../components/UserCard";
 import StatsCards from "../components/StatsCards";
 import Pagination from "../components/Pagination";
 
-function UserList() {
+interface UserListProps {
+  darkMode: boolean;
+  setDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+function UserList({ darkMode, setDarkMode }: UserListProps) {
   const [users, setUsers] = useState<User[]>([]);
   const [search, setSearch] = useState("");
 
@@ -134,8 +139,17 @@ function UserList() {
   }
 
   return (
-  <div className="h-screen bg-slate-100 overflow-hidden">
-    <Navbar />
+  <div
+  className={`h-screen overflow-hidden transition-all duration-300 ${
+    darkMode
+      ? "bg-slate-900 text-white"
+      : "bg-slate-100 text-slate-900"
+  }`}
+>
+    <Navbar
+  darkMode={darkMode}
+  setDarkMode={setDarkMode}
+/>
 
     <div className="flex h-[calc(100vh-72px)]">
 
@@ -169,6 +183,7 @@ function UserList() {
               <UserCard
                 key={user.id}
                 user={user}
+                darkMode={darkMode}
               />
             ))
           ) : (
