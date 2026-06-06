@@ -1,14 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AppRoutes from "./routes/AppRoutes";
 
 function App() {
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(() => {
+    return localStorage.getItem("theme") === "dark";
+  });
+
+  useEffect(() => {
+    localStorage.setItem(
+      "theme",
+      darkMode ? "dark" : "light"
+    );
+  }, [darkMode]);
 
   return (
-    <AppRoutes
-      darkMode={darkMode}
-      setDarkMode={setDarkMode}
-    />
+    <div className={darkMode ? "dark" : ""}>
+      <AppRoutes
+        darkMode={darkMode}
+        setDarkMode={setDarkMode}
+      />
+    </div>
   );
 }
 

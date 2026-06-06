@@ -116,12 +116,31 @@ function UserList({ darkMode, setDarkMode }: UserListProps) {
   );
 
   if (loading) {
-    return (
-      <div className="p-6 text-center">
-        Loading users...
+  return (
+    <div className="h-screen bg-slate-100 p-8">
+      <div className="animate-pulse">
+
+        {/* Stats Cards Skeleton */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          <div className="h-28 bg-slate-300 rounded-2xl"></div>
+          <div className="h-28 bg-slate-300 rounded-2xl"></div>
+          <div className="h-28 bg-slate-300 rounded-2xl"></div>
+        </div>
+
+        {/* User Cards Skeleton */}
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {[1, 2, 3, 4, 5, 6].map((item) => (
+            <div
+              key={item}
+              className="bg-slate-300 rounded-2xl h-64"
+            ></div>
+          ))}
+        </div>
+
       </div>
-    );
-  }
+    </div>
+  );
+}
 
   if (error) {
     return (
@@ -166,6 +185,7 @@ function UserList({ darkMode, setDarkMode }: UserListProps) {
         setSelectedCity={setSelectedCity}
         selectedCompany={selectedCompany}
         setSelectedCompany={setSelectedCompany}
+        darkMode={darkMode}
       />
 
       <main
@@ -175,23 +195,39 @@ function UserList({ darkMode, setDarkMode }: UserListProps) {
         p-8
         "
       >
-        <StatsCards users={users} />
+       <StatsCards users={users} darkMode={darkMode} />
 
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {currentUsers.length > 0 ? (
-            currentUsers.map((user) => (
-              <UserCard
-                key={user.id}
-                user={user}
-                darkMode={darkMode}
-              />
-            ))
-          ) : (
-            <div className="col-span-full text-center text-lg font-semibold">
-              No users found
-            </div>
-          )}
-        </div>
+<div className="mb-6">
+  <p
+    className={`text-sm font-medium ${
+      darkMode
+        ? "text-slate-400"
+        : "text-slate-600"
+    }`}
+  >
+    Showing{" "}
+    <span className="font-bold text-blue-500">
+      {sortedUsers.length}
+    </span>{" "}
+    user(s)
+  </p>
+</div>
+
+<div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+  {currentUsers.length > 0 ? (
+    currentUsers.map((user) => (
+      <UserCard
+        key={user.id}
+        user={user}
+        darkMode={darkMode}
+      />
+    ))
+  ) : (
+    <div className="col-span-full text-center text-lg font-semibold">
+      No users found
+    </div>
+  )}
+</div>
 
         <Pagination
           currentPage={currentPage}

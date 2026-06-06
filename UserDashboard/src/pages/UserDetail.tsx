@@ -3,7 +3,12 @@ import { useNavigate, useParams } from "react-router-dom";
 import type { User } from "../types/User";
 import { getUsers } from "../services/UserServices";
 
-function UserDetail() {
+interface UserDetailProps {
+  darkMode: boolean;
+  setDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+function UserDetail({ darkMode }: UserDetailProps) {
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -22,26 +27,42 @@ function UserDetail() {
 
   if (!user) {
     return (
-      <div className="min-h-screen flex items-center justify-center text-xl font-semibold">
-        Loading...
+      <div
+  className={`min-h-screen flex items-center justify-center text-xl font-semibold ${
+    darkMode
+      ? "bg-slate-950 text-white"
+      : "bg-white text-slate-900"
+  }`}
+>        Loading...
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-100 via-blue-50 to-slate-200 p-8">
-
+    <div
+  className={`min-h-screen p-8 transition-all duration-300 ${
+    darkMode
+      ? "bg-slate-950 text-white"
+      : "bg-gradient-to-br from-slate-100 via-blue-50 to-slate-200 text-slate-900"
+  }`}
+>
       {/* Profile Card */}
       <div
-        className="
-        max-w-4xl
-        mx-auto
-        bg-white
-        rounded-3xl
-        shadow-lg
-        p-6
-        mb-8
-        "
+        className={`
+max-w-4xl
+mx-auto
+rounded-3xl
+shadow-lg
+p-6
+mb-8
+transition-all
+duration-300
+${
+  darkMode
+    ? "bg-slate-800"
+    : "bg-white"
+}
+`}
       >
         <div className="flex flex-col items-center text-center">
 
@@ -64,11 +85,16 @@ function UserDetail() {
             {user.name[0]}
           </div>
 
-          <h1 className="text-5xl font-bold text-slate-800">
-            {user.name}
+          <h1
+  className={`text-5xl font-bold ${
+    darkMode
+      ? "text-white"
+      : "text-slate-800"
+  }`}
+>        {user.name}
           </h1>
 
-          <p className="text-slate-500 text-xl mt-2">
+          <p className={`text-slate-500 text-xl mt-2 ${darkMode ? "text-slate-400" : "text-slate-500"}`}>
             @{user.username}
           </p>
         </div>
@@ -76,48 +102,55 @@ function UserDetail() {
 
       {/* Tabs */}
       <div
-        className="
-        max-w-md
-        mx-auto
-        bg-white
-        rounded-2xl
-        shadow-md
-        p-2
-        flex
-        justify-center
-        gap-2
-        mb-8
-        "
+        className={`
+max-w-md
+mx-auto
+rounded-2xl
+shadow-md
+p-2
+flex
+justify-center
+gap-2
+mb-8
+${
+  darkMode
+    ? "bg-slate-800"
+    : "bg-white"
+}
+`}
       >
         <button
           onClick={() => setActiveTab("contact")}
-          className={`px-5 py-2 rounded-xl transition-all duration-300 ${
-            activeTab === "contact"
+          className={`px-5 py-2 rounded-xl transition-all duration-300 ${activeTab === "contact"
               ? "bg-blue-600 text-white shadow-md"
-              : "text-slate-600 hover:bg-slate-100"
-          }`}
+              : darkMode
+                ? "text-slate-300 hover:bg-slate-700"
+                : "text-slate-600 hover:bg-slate-100"
+            }`}
         >
           Contact
         </button>
 
         <button
           onClick={() => setActiveTab("address")}
-          className={`px-5 py-2 rounded-xl transition-all duration-300 ${
-            activeTab === "address"
+          className={`px-5 py-2 rounded-xl transition-all duration-300 ${activeTab === "address"
               ? "bg-blue-600 text-white shadow-md"
-              : "text-slate-600 hover:bg-slate-100"
-          }`}
+              : darkMode
+                ? "text-slate-300 hover:bg-slate-700"
+                : "text-slate-600 hover:bg-slate-100"
+            }`}
         >
           Address
         </button>
 
         <button
           onClick={() => setActiveTab("company")}
-          className={`px-5 py-2 rounded-xl transition-all duration-300 ${
-            activeTab === "company"
+          className={`px-5 py-2 rounded-xl transition-all duration-300 ${activeTab === "company"
               ? "bg-blue-600 text-white shadow-md"
-              : "text-slate-600 hover:bg-slate-100"
-          }`}
+              : darkMode
+                ? "text-slate-300 hover:bg-slate-700"
+                : "text-slate-600 hover:bg-slate-100"
+            }`}
         >
           Company
         </button>
@@ -125,15 +158,20 @@ function UserDetail() {
 
       {/* Information Card */}
       <div
-        className="
-        max-w-4xl
-        mx-auto
-        bg-white
-        rounded-3xl
-        shadow-lg
-        p-10
-        mb-8
-        "
+        className={`
+  max-w-4xl
+  mx-auto
+  rounded-3xl
+  shadow-lg
+  p-10
+  mb-8
+  transition-all
+  duration-300
+  ${darkMode
+            ? "bg-slate-800 text-white"
+            : "bg-white text-slate-900"
+          }
+  `}
       >
 
         {activeTab === "contact" && (
