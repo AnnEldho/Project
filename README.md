@@ -150,6 +150,12 @@ npm run build
 npm run preview
 ```
 
+## Testing
+
+Run tests using:
+
+```bash
+npm test
 ---
 
 ## Performance Optimizations
