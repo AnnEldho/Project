@@ -1,28 +1,32 @@
 import type { User } from "../types/User";
-import { FaEnvelope, FaPhone, FaBuilding, FaMapMarkerAlt } from "react-icons/fa";
+import { FaHeart, FaRegHeart, FaEnvelope, FaPhone, FaBuilding, FaMapMarkerAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 interface UserCardProps {
   user: User;
   darkMode: boolean;
+  isFavorite: boolean;
+  toggleFavorite: (id: number) => void;
 }
 
-function UserCard({ user, darkMode }: UserCardProps) {
+function UserCard({ user, darkMode, isFavorite, toggleFavorite }: UserCardProps) {
   const navigate = useNavigate();
   return (
     <div
       className={`rounded-2xl shadow-lg p-6 transition-all duration-300 ${darkMode
-          ? "bg-slate-800 text-white"
-          : "bg-white text-slate-900"
+        ? "bg-slate-800 text-white"
+        : "bg-white text-slate-900"
         }`}
-    >       <div className="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center text-xl font-bold">
-        {user.name.charAt(0)}
-      </div>
-      <div className="mb-4">
+    >   
+    <div className="flex justify-between items-start mb-4">
+  <div className="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center text-xl font-bold">
+    {user.name.charAt(0)}
+  </div>
+    <div className="mb-4">
         <h2
           className={`text-3xl font-bold ${darkMode
-              ? "text-white"
-              : "text-slate-800"
+            ? "text-white"
+            : "text-slate-800"
             }`}
         >
           {user.name}
@@ -37,7 +41,18 @@ function UserCard({ user, darkMode }: UserCardProps) {
         >
           @{user.username}
         </p>
-      </div>
+    </div>
+     <button
+    onClick={() => toggleFavorite(user.id)}
+    className="text-2xl transition-all duration-300 hover:scale-125"
+  >
+    {isFavorite ? (
+      <FaHeart className="text-red-500" />
+    ) : (
+      <FaRegHeart className="text-slate-400" />
+    )}
+  </button>
+</div>
 
       <div className="space-y-3">
         <div className="flex items-center gap-2 mb-4">

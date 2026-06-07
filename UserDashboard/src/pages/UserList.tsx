@@ -15,6 +15,10 @@ interface UserListProps {
 
 function UserList({ darkMode, setDarkMode }: UserListProps) {
   const [users, setUsers] = useState<User[]>([]);
+
+  const [favorites, setFavorites] = useState<number[]>([]);
+  const [showFavorites, setShowFavorites] = useState(false);
+
   const [search, setSearch] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
 
@@ -110,16 +114,23 @@ function UserList({ darkMode, setDarkMode }: UserListProps) {
       return 0;
     });
   }, [filteredUsers, sortField, sortOrder]);
+
+  const displayedUsers = showFavorites
+    ? sortedUsers.filter((user) =>
+      favorites.includes(user.id)
+    )
+    : sortedUsers;
+
   const indexOfLastUser = currentPage * usersPerPage;
   const indexOfFirstUser = indexOfLastUser - usersPerPage;
 
-  const currentUsers = sortedUsers.slice(
+  const currentUsers = displayedUsers.slice(
     indexOfFirstUser,
     indexOfLastUser
   );
 
   const totalPages = Math.ceil(
-    sortedUsers.length / usersPerPage
+    displayedUsers.length / usersPerPage
   );
 
   if (loading) {
@@ -202,6 +213,13 @@ function UserList({ darkMode, setDarkMode }: UserListProps) {
 
     URL.revokeObjectURL(url);
   };
+  const toggleFavorite = (id: number) => {
+    setFavorites((prev) =>
+      prev.includes(id)
+        ? prev.filter((fav) => fav !== id)
+        : [...prev, id]
+    );
+  };
   return (
     <div
       className={`h-screen overflow-hidden transition-all duration-300 ${darkMode
@@ -244,41 +262,64 @@ function UserList({ darkMode, setDarkMode }: UserListProps) {
           <div className="mb-6 flex items-center justify-between">
             <p
               className={`text-sm font-medium ${darkMode
-                  ? "text-slate-400"
-                  : "text-slate-600"
+                ? "text-slate-400"
+                : "text-slate-600"
                 }`}
             >
               Showing{" "}
               <span className="font-bold text-blue-500">
-                {sortedUsers.length}
+                {displayedUsers.length}
               </span>{" "}
               user(s)
             </p>
-
-           <button
-  onClick={exportToCSV}
-  className="
-    w-30
-    bg-green-600
-    hover:bg-green-700
-    text-white
+            <div className="flex items-center gap-3">
+              <button
+                onClick={() => setShowFavorites(!showFavorites)}
+                className={`
     px-4
     py-2
     rounded-xl
-    text-sm
+    text-white
     font-medium
     transition-all
     duration-300
-    hover:scale-105
-    flex
-    items-center
-    justify-center
-    gap-2
-  "
->
-  <FaDownload />
-  Export 
-</button>
+     ${
+      showFavorites
+        ? "bg-red-600 text-white hover:bg-red-700"
+        : darkMode
+        ? "bg-slate-700 text-white hover:bg-slate-600 transition-all duration-300 hover:scale-105"
+        : "bg-blue-600 text-slate-900 hover:bg-blue-400 transition-all duration-300 hover:scale-105"
+    }
+  `}
+              >
+                {showFavorites
+                  ? "Show All"
+                  : "Favorites"}
+              </button>
+              <button
+                onClick={exportToCSV}
+                className="
+                       w-30
+                       bg-green-600
+                       hover:bg-green-700
+                       text-white
+                       px-4
+                       py-2
+                       rounded-xl
+                       text-sm
+                       font-medium
+                       transition-all
+                       duration-300
+                       hover:scale-105
+                       flex
+                       items-center
+                       justify-center
+                       gap-2"
+              >
+                <FaDownload />
+                Export
+              </button>
+            </div>
           </div>
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -288,6 +329,8 @@ function UserList({ darkMode, setDarkMode }: UserListProps) {
                   key={user.id}
                   user={user}
                   darkMode={darkMode}
+                  isFavorite={favorites.includes(user.id)}
+                  toggleFavorite={toggleFavorite}
                 />
               ))
             ) : (

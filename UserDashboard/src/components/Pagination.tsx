@@ -8,7 +8,8 @@ function Pagination({
   currentPage,
   totalPages,
   setCurrentPage,
-}: PaginationProps) {
+}: PaginationProps)
+ {
   return (
     <div className="flex justify-center items-center gap-4 mt-8">
       <button
