@@ -57,13 +57,13 @@ function UserList({ darkMode, setDarkMode }: UserListProps) {
     sortField,
     sortOrder,
   ]);
-useEffect(() => {
-  const timer = setTimeout(() => {
-    setDebouncedSearch(search);
-  }, 500);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedSearch(search);
+    }, 500);
 
-  return () => clearTimeout(timer);
-}, [search]);
+    return () => clearTimeout(timer);
+  }, [search]);
   const cities = [...new Set(users.map((user) => user.address.city))];
   const companies = [...new Set(users.map((user) => user.company.name))];
 
@@ -73,8 +73,8 @@ useEffect(() => {
     return users.filter((user) => {
       const matchesSearch =
         user.name.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
-user.username.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
-user.email.toLowerCase().includes(debouncedSearch.toLowerCase());
+        user.username.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
+        user.email.toLowerCase().includes(debouncedSearch.toLowerCase());
       const matchesCity =
         selectedCity === "" ||
         user.address.city === selectedCity;
@@ -126,6 +126,8 @@ user.email.toLowerCase().includes(debouncedSearch.toLowerCase());
       <div className="h-screen bg-slate-100 p-8">
         <div className="animate-pulse">
 
+
+
           {/* Stats Cards Skeleton */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
             <div className="h-28 bg-slate-300 rounded-2xl"></div>
@@ -162,12 +164,48 @@ user.email.toLowerCase().includes(debouncedSearch.toLowerCase());
       </div>
     );
   }
+  const exportToCSV = () => {
+    const headers = [
+      "Name",
+      "Username",
+      "Email",
+      "Phone",
+      "City",
+      "Company",
+    ];
 
+    const rows = sortedUsers.map((user) => [
+      user.name,
+      user.username,
+      user.email,
+      user.phone,
+      user.address.city,
+      user.company.name,
+    ]);
+
+    const csvContent = [
+      headers.join(","),
+      ...rows.map((row) => row.join(",")),
+    ].join("\n");
+
+    const blob = new Blob([csvContent], {
+      type: "text/csv;charset=utf-8;",
+    });
+
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "users.csv";
+    link.click();
+
+    URL.revokeObjectURL(url);
+  };
   return (
     <div
       className={`h-screen overflow-hidden transition-all duration-300 ${darkMode
-          ? "bg-slate-900 text-white"
-          : "bg-slate-100 text-slate-900"
+        ? "bg-slate-900 text-white"
+        : "bg-slate-100 text-slate-900"
         }`}
     >
       <Navbar
@@ -202,7 +240,7 @@ user.email.toLowerCase().includes(debouncedSearch.toLowerCase());
         >
           <StatsCards users={users} darkMode={darkMode} />
 
-          <div className="mb-6">
+          <div className="mb-6 flex items-center justify-between">
             <p
               className={`text-sm font-medium ${darkMode
                   ? "text-slate-400"
@@ -215,6 +253,25 @@ user.email.toLowerCase().includes(debouncedSearch.toLowerCase());
               </span>{" "}
               user(s)
             </p>
+
+            <button
+              onClick={exportToCSV}
+              className="
+      bg-green-600
+      hover:bg-green-700
+      text-white
+      px-4
+      py-2
+      rounded-xl
+      text-sm
+      font-medium
+      transition-all
+      duration-300
+      hover:scale-105
+    "
+            >
+              Export CSV
+            </button>
           </div>
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
