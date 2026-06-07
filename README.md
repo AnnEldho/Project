@@ -46,48 +46,60 @@ https://jsonplaceholder.typicode.com/users
 ## Project Structure
 
 ```text
-user-management-dashboard/
-│
-├── public/
-│
-├── screenshots/
-│   ├── dashboard-light.png
-│   ├── dashboard-dark.png
-│   ├── user-detail.png
-│   └── search-filter.png
-│
-├── src/
-│   ├── components/
-│   │   ├── Navbar.tsx
-│   │   ├── Sidebar.tsx
-│   │   ├── SearchBar.tsx
-│   │   ├── SortControls.tsx
-│   │   ├── FilterControls.tsx
-│   │   ├── StatsCards.tsx
-│   │   ├── UserCard.tsx
-│   │   └── Pagination.tsx
-│   │
-│   ├── pages/
-│   │   ├── UserList.tsx
-│   │   └── UserDetail.tsx
-│   │
-│   ├── routes/
-│   │   └── AppRoutes.tsx
-│   │
-│   ├── services/
-│   │   └── UserServices.ts
-│   │
-│   ├── types/
-│   │   └── User.ts
-│   │
-│   ├── App.tsx
-│   └── main.tsx
+PROJECT/
 │
 ├── README.md
-├── package.json
-├── tsconfig.json
-├── vite.config.ts
-└── tailwind.config.js
+│
+└── UserDashboard/
+    │
+    ├── public/
+    │
+    ├── screenshots/
+    │   ├── dashboard-light.png
+    │   ├── dashboard-dark.png
+    │   ├── user-detail.png
+    │   └── search-filter.png
+    │
+    ├── src/
+    │   ├── components/
+    │   │   ├── Navbar.tsx
+    │   │   ├── Sidebar.tsx
+    │   │   ├── SearchBar.tsx
+    │   │   ├── SortControls.tsx
+    │   │   ├── FilterControls.tsx
+    │   │   ├── StatsCards.tsx
+    │   │   ├── UserCard.tsx
+    │   │   └── Pagination.tsx
+    │   │
+    │   ├── pages/
+    │   │   ├── UserList.tsx
+    │   │   └── UserDetail.tsx
+    │   │
+    │   ├── routes/
+    │   │   └── AppRoutes.tsx
+    │   │
+    │   ├── services/
+    │   │   └── UserServices.ts
+    │   │
+    │   ├── tests/
+    │   │   └── UserCard.test.tsx
+    │   │
+    │   ├── types/
+    │   │   └── User.ts
+    │   │
+    │   ├── setupTests.ts
+    │   ├── App.tsx
+    │   └── main.tsx
+    │
+    ├── package.json
+    ├── package-lock.json
+    ├── jest.config.cjs
+    ├── tsconfig.json
+    ├── tsconfig.app.json
+    ├── tsconfig.node.json
+    ├── tsconfig.test.json
+    ├── vite.config.ts
+    └── eslint.config.js
 ```
 
 ---
@@ -96,7 +108,7 @@ user-management-dashboard/
 
 ### Dashboard - Light Mode
 
-![Dashboard Light](./screenshots/dashboard-light.png)
+![Dashboard Light](./UserDashboard/screenshots/dashboard-light.png)
 
 ### Dashboard - Dark Mode
 
