@@ -89,9 +89,26 @@ function Sidebar({
             onClick={() => setShowSearch(!showSearch)}
             className="flex items-center justify-between cursor-pointer mb-3"
           >
-            <div className="flex items-center gap-2">
-              <FaSearch className="text-slate-400" />
-              <h3 className="font-semibold text-slate-300">
+            <div className="flex items-center gap-2 mb-3 group cursor-pointer">
+              <FaSearch
+                className="
+      text-slate-400
+      transition-all
+      duration-300
+      group-hover:rotate-12
+      group-hover:text-blue-400
+    "
+              />
+
+              <h3
+                className="
+      font-semibold
+      text-slate-300
+      transition-all
+      duration-300
+      group-hover:text-blue-400
+    "
+              >
                 Search Users
               </h3>
             </div>
@@ -119,9 +136,26 @@ function Sidebar({
             onClick={() => setShowSort(!showSort)}
             className="flex items-center justify-between cursor-pointer mb-3"
           >
-            <div className="flex items-center gap-2">
-              <FaSort className="text-slate-400" />
-              <h3 className="font-semibold text-slate-300">
+            <div className="flex items-center gap-2 mb-3 group cursor-pointer">
+              <FaSort
+                className="
+      text-slate-400
+      transition-all
+      duration-300
+      group-hover:rotate-12
+      group-hover:text-blue-400
+    "
+              />
+
+              <h3
+                className="
+      font-semibold
+      text-slate-300
+      transition-all
+      duration-300
+      group-hover:text-blue-400
+    "
+              >
                 Sort Users
               </h3>
             </div>
@@ -151,10 +185,27 @@ function Sidebar({
             onClick={() => setShowFilter(!showFilter)}
             className="flex items-center justify-between cursor-pointer mb-3"
           >
-            <div className="flex items-center gap-2">
-              <FaFilter className="text-slate-400" />
-              <h3 className="font-semibold text-slate-300">
-                Filters
+            <div className="flex items-center gap-2 mb-3 group cursor-pointer">
+              <FaFilter
+                className="
+      text-slate-400
+      transition-all
+      duration-300
+      group-hover:rotate-12
+      group-hover:text-blue-400
+    "
+              />
+
+              <h3
+                className="
+      font-semibold
+      text-slate-300
+      transition-all
+      duration-300
+      group-hover:text-blue-400
+    "
+              >
+                Filter Users
               </h3>
             </div>
 
@@ -192,10 +243,9 @@ function Sidebar({
                   font-medium
                   transition-all
                   duration-300
-                  ${
-                    darkMode
-                      ? "bg-slate-700 text-white hover:bg-slate-600"
-                      : "bg-slate-200 text-slate-900 hover:bg-slate-300"
+                  ${darkMode
+                    ? "bg-slate-700 text-white hover:bg-slate-600"
+                    : "bg-slate-200 text-slate-900 hover:bg-slate-300"
                   }
                 `}
               >

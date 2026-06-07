@@ -34,9 +34,27 @@ function Navbar({
             {darkMode ? <FaSun /> : <FaMoon />}
           </button>
 
-          <div className="h-10 w-10 rounded-full bg-blue-500 text-white flex items-center justify-center">
-            A
-          </div>
+          <div
+  className="
+    h-10
+    w-10
+    rounded-full
+    bg-blue-500
+    text-white
+    flex
+    items-center
+    justify-center
+    font-semibold
+    cursor-pointer
+    transition-all
+    duration-300
+    hover:scale-110
+    hover:shadow-lg
+    hover:rotate-30
+  "
+>
+  A
+</div>
         </div>
       </div>
     </nav>
