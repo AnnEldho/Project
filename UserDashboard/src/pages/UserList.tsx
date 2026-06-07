@@ -6,6 +6,7 @@ import Sidebar from "../components/Sidebar";
 import UserCard from "../components/UserCard";
 import StatsCards from "../components/StatsCards";
 import Pagination from "../components/Pagination";
+import { Fa0, FaDownload } from "react-icons/fa6";
 
 interface UserListProps {
   darkMode: boolean;
@@ -254,24 +255,30 @@ function UserList({ darkMode, setDarkMode }: UserListProps) {
               user(s)
             </p>
 
-            <button
-              onClick={exportToCSV}
-              className="
-      bg-green-600
-      hover:bg-green-700
-      text-white
-      px-4
-      py-2
-      rounded-xl
-      text-sm
-      font-medium
-      transition-all
-      duration-300
-      hover:scale-105
-    "
-            >
-              Export CSV
-            </button>
+           <button
+  onClick={exportToCSV}
+  className="
+    w-30
+    bg-green-600
+    hover:bg-green-700
+    text-white
+    px-4
+    py-2
+    rounded-xl
+    text-sm
+    font-medium
+    transition-all
+    duration-300
+    hover:scale-105
+    flex
+    items-center
+    justify-center
+    gap-2
+  "
+>
+  <FaDownload />
+  Export 
+</button>
           </div>
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
