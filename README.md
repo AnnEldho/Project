@@ -112,15 +112,15 @@ PROJECT/
 
 ### Dashboard - Dark Mode
 
-![Dashboard Dark](./screenshots/dashboard-dark.png)
+![Dashboard Dark](./UserDashboard/screenshots/dashboard-dark.png)
 
 ### User Detail Page
 
-![User Detail](./screenshots/user-detail.png)
+![User Detail](./UserDashboard/screenshots/user-detail.png)
 
 ### Search and Filter
 
-![Search Filter](./screenshots/filters-search.png)
+![Search Filter](./UserDashboard/screenshots/filters-search.png)
 
 ---
 

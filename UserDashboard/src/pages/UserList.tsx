@@ -6,7 +6,7 @@ import Sidebar from "../components/Sidebar";
 import UserCard from "../components/UserCard";
 import StatsCards from "../components/StatsCards";
 import Pagination from "../components/Pagination";
-import { Fa0, FaDownload } from "react-icons/fa6";
+import { FaDownload } from "react-icons/fa6";
 
 interface UserListProps {
   darkMode: boolean;
