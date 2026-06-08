@@ -1,12 +1,12 @@
 # User Management Dashboard
 
-A modern and responsive User Management Dashboard built using **React**, **TypeScript**, **Tailwind CSS**, and **Vite**. The application fetches user data from an external API and provides advanced features such as searching, sorting, filtering, pagination, dark mode, and detailed user profiles.
+A modern and responsive User Management Dashboard built using **React**, **TypeScript**, **Tailwind CSS**, **Vite**, and **Axios**. The application fetches user data from an external API and provides advanced features such as searching, sorting, filtering, pagination, dark mode, favorites, CSV export, and detailed user profiles.
 
 ---
 
 ## Features
 
-* Fetch user data from REST API
+* Fetch user data from REST API using Axios
 * Search users by name, username, or email
 * Debounced Search for improved performance
 * Sort users by name, username, or email
@@ -16,11 +16,14 @@ A modern and responsive User Management Dashboard built using **React**, **TypeS
 * Detailed User Profile Page
 * Responsive Design (Mobile, Tablet, Desktop)
 * Dark Mode with theme persistence
+* Favorites Feature
+* CSV Export Feature
 * Loading Skeletons
 * Error Handling
 * Search Results Counter
 * Lazy Loading using React.lazy and Suspense
 * Modern UI with Tailwind CSS
+* Unit Testing using Jest and React Testing Library
 
 ---
 
@@ -30,8 +33,11 @@ A modern and responsive User Management Dashboard built using **React**, **TypeS
 * TypeScript
 * Vite
 * Tailwind CSS
+* Axios
 * React Router DOM
 * React Icons
+* Jest
+* React Testing Library
 
 ---
 
@@ -58,7 +64,8 @@ PROJECT/
     │   ├── dashboard-light.png
     │   ├── dashboard-dark.png
     │   ├── user-detail.png
-    │   └── search-filter.png
+    │   ├── favorites.png
+    │   └── filter.png
     │
     ├── src/
     │   ├── components/
@@ -82,7 +89,9 @@ PROJECT/
     │   │   └── UserServices.ts
     │   │
     │   ├── tests/
-    │   │   └── UserCard.test.tsx
+    │   │   ├── UserCard.test.tsx
+    │   │   ├── StatsCards.test.tsx
+    │   │   └── SearchBar.test.tsx
     │   │
     │   ├── types/
     │   │   └── User.ts
@@ -118,16 +127,17 @@ PROJECT/
 
 ![User Detail](./UserDashboard/screenshots/user-detail.png)
 
-### Favorites
-![Favorite](./UserDashboard/screenshots/favorites.png)
+### Favorites Feature
+
+![Favorites](./UserDashboard/screenshots/favorites.png)
+
 ### Search and Filter
 
-![Search Filter](./UserDashboard/screenshots/filter.png.png)
+![Search Filter](./UserDashboard/screenshots/filter.png)
 
 ---
 
 ## Installation
-
 
 ### Clone the Repository
 
@@ -165,12 +175,22 @@ npm run build
 npm run preview
 ```
 
+---
+
 ## Testing
 
 Run tests using:
 
 ```bash
 npm test
+```
+
+### Implemented Test Cases
+
+* UserCard Component
+* StatsCards Component
+* SearchBar Component
+
 ---
 
 ## Performance Optimizations
@@ -178,19 +198,28 @@ npm test
 * Debounced Search using useEffect
 * Memoization using useMemo
 * Lazy Loading using React.lazy and Suspense
-* Efficient state management with React Hooks
+* Efficient State Management with React Hooks
 * Client-side Pagination
+
+---
+
+## Bonus Features
+
+* Dark Mode
+* Favorites Feature
+* CSV Export
+* Unit Testing
+* Responsive UI
 
 ---
 
 ## Future Enhancements
 
-* Unit Testing with Jest and React Testing Library
-* CSV Export
-* Favorites Feature
 * User Editing Functionality
 * Authentication and Authorization
 * Charts and Analytics Dashboard
+* Backend Integration
+* Role-Based Access Control
 
 ---
 
