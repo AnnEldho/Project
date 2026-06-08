@@ -118,9 +118,11 @@ PROJECT/
 
 ![User Detail](./UserDashboard/screenshots/user-detail.png)
 
+### Favorites
+![Favorite](./UserDashboard/screenshots/favorites.png)
 ### Search and Filter
 
-![Search Filter](./UserDashboard/screenshots/filters-search.png)
+![Search Filter](./UserDashboard/screenshots/filter.png.png)
 
 ---
 
